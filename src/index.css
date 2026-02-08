@@ -1,95 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Dancing+Script:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 25 30% 12%;
+    --foreground: 36 50% 90%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 25 35% 16%;
+    --card-foreground: 36 50% 90%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 25 35% 16%;
+    --popover-foreground: 36 50% 90%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 30 55% 50%;
+    --primary-foreground: 36 50% 95%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 25 40% 22%;
+    --secondary-foreground: 36 50% 90%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 25 25% 20%;
+    --muted-foreground: 30 20% 60%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 0 50% 85%;
+    --accent-foreground: 25 40% 15%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 30 30% 25%;
+    --input: 30 30% 25%;
+    --ring: 30 55% 50%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Custom chocolate palette */
+    --chocolate-deep: 15 55% 22%;
+    --chocolate-rich: 20 50% 30%;
+    --chocolate-warm: 25 45% 40%;
+    --gold: 35 60% 55%;
+    --gold-light: 38 70% 75%;
+    --cream: 45 80% 94%;
+    --pink-soft: 0 60% 88%;
+    --pink-warm: 350 50% 75%;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
@@ -101,5 +64,122 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Lora', serif;
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+  }
+
+  .font-handwritten {
+    font-family: 'Dancing Script', cursive;
+  }
+
+  .font-serif-display {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+@layer components {
+  .chocolate-gradient {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--chocolate-deep)) 0%,
+      hsl(var(--chocolate-rich)) 40%,
+      hsl(var(--chocolate-warm)) 100%
+    );
+  }
+
+  .gold-shimmer {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--gold)) 0%,
+      hsl(var(--gold-light)) 50%,
+      hsl(var(--gold)) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .card-chocolate {
+    background: linear-gradient(
+      145deg,
+      hsl(var(--chocolate-rich)) 0%,
+      hsl(var(--chocolate-deep)) 100%
+    );
+    border: 1px solid hsl(var(--gold) / 0.2);
+    box-shadow: 0 8px 32px hsl(var(--chocolate-deep) / 0.5);
+  }
+
+  .btn-unwrap {
+    background: linear-gradient(135deg, hsl(var(--gold)) 0%, hsl(var(--gold-light)) 100%);
+    color: hsl(var(--chocolate-deep));
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    padding: 0.875rem 2.5rem;
+    border-radius: 9999px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px hsl(var(--gold) / 0.3);
+  }
+
+  .btn-unwrap:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px hsl(var(--gold) / 0.5);
+  }
+
+  .diary-card {
+    background: hsl(var(--cream));
+    color: hsl(var(--chocolate-deep));
+    border-left: 4px solid hsl(var(--gold));
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+  }
+
+  .gift-box {
+    background: linear-gradient(145deg, hsl(var(--gold)) 0%, hsl(var(--gold-light)) 100%);
+    border-radius: 1rem;
+    box-shadow: 0 20px 60px hsl(var(--chocolate-deep) / 0.6);
+  }
+
+  .text-gold {
+    color: hsl(var(--gold));
+  }
+
+  .text-cream {
+    color: hsl(var(--cream));
+  }
+
+  .text-pink-soft {
+    color: hsl(var(--pink-soft));
+  }
+
+  .bg-cream {
+    background-color: hsl(var(--cream));
+  }
+}
+
+@keyframes shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-heartbeat {
+  animation: heartbeat 2s ease-in-out infinite;
 }
