@@ -3,9 +3,9 @@ import { chocolates } from "@/data/chocolates";
 
 const ChocolateDiary = () => {
   return (
-    <section className="min-h-screen px-4 py-16 md:py-24 max-w-3xl mx-auto">
+    <section className="min-h-screen px-3 sm:px-4 py-12 md:py-24 max-w-3xl mx-auto">
       <motion.h2
-        className="text-3xl md:text-5xl font-serif-display text-center gold-shimmer mb-2"
+        className="text-2xl sm:text-3xl md:text-5xl font-serif-display text-center gold-shimmer mb-2"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
@@ -13,7 +13,7 @@ const ChocolateDiary = () => {
         📖 Chocolate Day Diary
       </motion.h2>
       <motion.p
-        className="text-center text-muted-foreground mb-12 font-handwritten text-xl italic"
+        className="text-center text-muted-foreground mb-8 md:mb-12 font-handwritten text-lg md:text-xl italic"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
@@ -22,7 +22,7 @@ const ChocolateDiary = () => {
         — For Her —
       </motion.p>
 
-      <div className="space-y-6">
+      <div className="space-y-4 md:space-y-6">
         {chocolates.map((choc, i) => (
           <motion.div
             key={choc.id}
@@ -32,10 +32,10 @@ const ChocolateDiary = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.1, duration: 0.5 }}
           >
-            <h3 className="font-serif-display text-lg md:text-xl font-semibold mb-2">
+            <h3 className="font-serif-display text-base sm:text-lg md:text-xl font-semibold mb-1.5 md:mb-2">
               {choc.emoji} {choc.name}
             </h3>
-            <p className="leading-relaxed text-sm md:text-base opacity-90">
+            <p className="leading-relaxed text-xs sm:text-sm md:text-base opacity-90">
               {choc.description}
             </p>
           </motion.div>
@@ -43,7 +43,7 @@ const ChocolateDiary = () => {
       </div>
 
       <motion.p
-        className="text-center mt-16 font-handwritten text-2xl md:text-3xl text-gold"
+        className="text-center mt-12 md:mt-16 font-handwritten text-xl sm:text-2xl md:text-3xl text-gold px-2"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}

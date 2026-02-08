@@ -6,12 +6,12 @@ interface OpeningSectionProps {
 
 const OpeningSection = ({ onStart }: OpeningSectionProps) => {
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center px-6 text-center chocolate-gradient relative overflow-hidden">
+    <section className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 text-center chocolate-gradient relative overflow-hidden">
       {/* Floating chocolate emojis */}
       {["🍫", "🤎", "✨", "💝", "🍫"].map((emoji, i) => (
         <motion.span
           key={i}
-          className="absolute text-3xl opacity-20 pointer-events-none"
+          className="absolute text-2xl sm:text-3xl opacity-20 pointer-events-none"
           style={{
             top: `${15 + i * 18}%`,
             left: `${10 + i * 20}%`,
@@ -31,7 +31,7 @@ const OpeningSection = ({ onStart }: OpeningSectionProps) => {
       ))}
 
       <motion.p
-        className="font-handwritten text-2xl md:text-4xl text-gold max-w-xl leading-relaxed"
+        className="font-handwritten text-xl sm:text-2xl md:text-4xl text-gold max-w-xl leading-relaxed px-2"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
@@ -40,7 +40,7 @@ const OpeningSection = ({ onStart }: OpeningSectionProps) => {
       </motion.p>
 
       <motion.p
-        className="mt-8 text-base md:text-xl text-cream max-w-lg leading-relaxed italic opacity-80"
+        className="mt-6 sm:mt-8 text-sm sm:text-base md:text-xl text-cream max-w-lg leading-relaxed italic opacity-80 px-2"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.5, delay: 1, ease: "easeOut" }}
@@ -50,7 +50,7 @@ const OpeningSection = ({ onStart }: OpeningSectionProps) => {
       </motion.p>
 
       <motion.button
-        className="btn-unwrap mt-12 text-lg"
+        className="btn-unwrap mt-8 sm:mt-12 text-base sm:text-lg"
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, delay: 2.2, ease: "easeOut" }}
