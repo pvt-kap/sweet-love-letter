@@ -65,6 +65,7 @@
   body {
     @apply bg-background text-foreground;
     font-family: 'Lora', serif;
+    overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -81,6 +82,56 @@
 }
 
 @layer components {
+  /* Melting chocolate background */
+  .melting-bg {
+    position: relative;
+    background: 
+      linear-gradient(
+        180deg,
+        hsl(var(--chocolate-deep)) 0%,
+        hsl(var(--background)) 15%,
+        hsl(var(--background)) 100%
+      );
+  }
+
+  .melting-bg::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: 
+      radial-gradient(ellipse 60px 50px at 10% 100%, hsl(var(--chocolate-rich)) 70%, transparent 71%),
+      radial-gradient(ellipse 80px 65px at 25% 100%, hsl(var(--chocolate-deep)) 70%, transparent 71%),
+      radial-gradient(ellipse 50px 40px at 40% 100%, hsl(var(--chocolate-rich)) 70%, transparent 71%),
+      radial-gradient(ellipse 70px 55px at 55% 100%, hsl(var(--chocolate-deep)) 70%, transparent 71%),
+      radial-gradient(ellipse 90px 70px at 72% 100%, hsl(var(--chocolate-rich)) 70%, transparent 71%),
+      radial-gradient(ellipse 55px 45px at 88% 100%, hsl(var(--chocolate-deep)) 70%, transparent 71%),
+      linear-gradient(180deg, hsl(var(--chocolate-deep)) 0%, hsl(var(--chocolate-deep)) 50%, transparent 100%);
+    z-index: 5;
+    pointer-events: none;
+    animation: drip-flow 6s ease-in-out infinite alternate;
+  }
+
+  .melting-bg::after {
+    content: '';
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: linear-gradient(90deg, 
+      hsl(var(--chocolate-deep)) 0%, 
+      hsl(var(--chocolate-warm)) 50%, 
+      hsl(var(--chocolate-deep)) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 4s ease-in-out infinite;
+    z-index: 5;
+    pointer-events: none;
+  }
+
   .chocolate-gradient {
     background: linear-gradient(
       135deg,
@@ -134,8 +185,14 @@
     background: hsl(var(--cream));
     color: hsl(var(--chocolate-deep));
     border-left: 4px solid hsl(var(--gold));
-    padding: 1.5rem;
+    padding: 1.25rem;
     border-radius: 0.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .diary-card {
+      padding: 1.5rem;
+    }
   }
 
   .gift-box {
@@ -159,8 +216,24 @@
   .bg-cream {
     background-color: hsl(var(--cream));
   }
+
+  /* Chocolate drip SVG fills */
+  .chocolate-drip-path {
+    fill: hsl(var(--background));
+  }
+
+  .chocolate-drip-drop {
+    fill: hsl(var(--chocolate-rich));
+  }
+
+  /* Glow pulse for selected chocolate */
+  .glow-pulse {
+    animation: glow-beat 2s ease-in-out infinite;
+    box-shadow: 0 0 20px hsl(var(--gold) / 0.4), 0 0 40px hsl(var(--pink-warm) / 0.2);
+  }
 }
 
+/* Keyframes */
 @keyframes shimmer {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -176,6 +249,36 @@
   50% { transform: scale(1.1); }
 }
 
+@keyframes drip-flow {
+  0% { transform: translateY(-5px); }
+  100% { transform: translateY(5px); }
+}
+
+@keyframes glow-beat {
+  0%, 100% { 
+    box-shadow: 0 0 15px hsl(var(--gold) / 0.3), 0 0 30px hsl(var(--pink-warm) / 0.15);
+  }
+  50% { 
+    box-shadow: 0 0 25px hsl(var(--gold) / 0.6), 0 0 50px hsl(var(--pink-warm) / 0.3);
+  }
+}
+
+@keyframes sparkle-fade {
+  0% { 
+    transform: scale(1);
+    opacity: 1; 
+  }
+  100% { 
+    transform: scale(0) translateY(-20px);
+    opacity: 0; 
+  }
+}
+
+@keyframes drip-drop {
+  0%, 80% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(12px); opacity: 0; }
+}
+
 .animate-float {
   animation: float 4s ease-in-out infinite;
 }
@@ -183,3 +286,8 @@
 .animate-heartbeat {
   animation: heartbeat 2s ease-in-out infinite;
 }
+
+.animate-drip-1 { animation: drip-drop 3s ease-in-out 0.5s infinite; }
+.animate-drip-2 { animation: drip-drop 3s ease-in-out 1s infinite; }
+.animate-drip-3 { animation: drip-drop 3s ease-in-out 1.5s infinite; }
+.animate-drip-4 { animation: drip-drop 3s ease-in-out 2s infinite; }

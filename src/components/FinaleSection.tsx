@@ -8,7 +8,6 @@ const FinaleSection = () => {
 
   const handleOpen = () => {
     setOpened(true);
-    // Fire confetti
     const end = Date.now() + 3000;
     const colors = ["#D4A574", "#F4C2C2", "#8B4513", "#FFD700"];
     (function frame() {
@@ -41,10 +40,39 @@ const FinaleSection = () => {
 
   const letterParagraphs = loveLetter.split("\n\n");
 
+  // Typewriter: split each paragraph into words for staggered reveal
+  const WordReveal = ({ text, paraIndex }: { text: string; paraIndex: number }) => {
+    const words = text.split(" ");
+    const baseDelay = 0.8 + paraIndex * 0.6;
+    return (
+      <motion.p
+        className="font-handwritten text-sm sm:text-base md:text-xl leading-relaxed text-[hsl(var(--chocolate-deep))]"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: baseDelay, duration: 0.3 }}
+      >
+        {words.map((word, wi) => (
+          <motion.span
+            key={wi}
+            className="inline-block mr-1"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              delay: baseDelay + wi * 0.04,
+              duration: 0.3,
+            }}
+          >
+            {word}
+          </motion.span>
+        ))}
+      </motion.p>
+    );
+  };
+
   return (
-    <section className="min-h-screen px-4 py-16 md:py-24 flex flex-col items-center justify-center">
+    <section className="min-h-screen px-3 sm:px-4 py-12 md:py-24 flex flex-col items-center justify-center">
       <motion.h2
-        className="text-3xl md:text-5xl font-serif-display text-center gold-shimmer mb-12"
+        className="text-2xl sm:text-3xl md:text-5xl font-serif-display text-center gold-shimmer mb-8 md:mb-12"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
@@ -62,18 +90,17 @@ const FinaleSection = () => {
             whileTap={{ scale: 0.97 }}
           >
             <motion.div
-              className="gift-box w-64 h-64 md:w-80 md:h-80 flex items-center justify-center relative overflow-hidden"
+              className="gift-box w-52 h-52 sm:w-64 sm:h-64 md:w-80 md:h-80 flex items-center justify-center relative overflow-hidden"
               animate={{ y: [0, -8, 0] }}
               transition={{ duration: 3, repeat: Infinity }}
             >
-              {/* Ribbon */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-4 h-full bg-[hsl(var(--pink-warm))] opacity-60 absolute" />
-                <div className="h-4 w-full bg-[hsl(var(--pink-warm))] opacity-60 absolute" />
+                <div className="w-3 sm:w-4 h-full bg-[hsl(var(--pink-warm))] opacity-60 absolute" />
+                <div className="h-3 sm:h-4 w-full bg-[hsl(var(--pink-warm))] opacity-60 absolute" />
               </div>
               <div className="relative z-10 text-center">
-                <span className="text-6xl md:text-7xl block mb-4">🎁</span>
-                <p className="font-handwritten text-lg md:text-xl text-[hsl(var(--chocolate-deep))]">
+                <span className="text-5xl sm:text-6xl md:text-7xl block mb-3 md:mb-4">🎁</span>
+                <p className="font-handwritten text-base sm:text-lg md:text-xl text-[hsl(var(--chocolate-deep))]">
                   Tap to open…
                 </p>
               </div>
@@ -87,29 +114,21 @@ const FinaleSection = () => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
           >
-            <div className="bg-cream rounded-2xl p-6 md:p-10 shadow-2xl">
-              <div className="space-y-5">
+            <div className="bg-cream rounded-2xl p-4 sm:p-6 md:p-10 shadow-2xl">
+              <div className="space-y-4 md:space-y-5">
                 {letterParagraphs.map((para, i) => (
-                  <motion.p
-                    key={i}
-                    className="font-handwritten text-base md:text-xl leading-relaxed text-[hsl(var(--chocolate-deep))]"
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5 + i * 0.15, duration: 0.5 }}
-                  >
-                    {para}
-                  </motion.p>
+                  <WordReveal key={i} text={para} paraIndex={i} />
                 ))}
               </div>
 
               <motion.div
-                className="mt-10 text-center"
+                className="mt-8 md:mt-10 text-center"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 2.5 }}
               >
                 <button
-                  className="btn-unwrap text-base md:text-lg"
+                  className="btn-unwrap text-sm sm:text-base md:text-lg"
                   onClick={handleRedeem}
                 >
                   Redeem This Chocolate in Real Life 🍫
